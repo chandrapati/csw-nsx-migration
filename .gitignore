@@ -1,5 +1,15 @@
 # Generated artifacts
 *.pdf
+# ...but ship the customer one-pager PDF
+!CSW-NSX-Migration-One-Pager.pdf
+
+# NSX discovery output (may contain customer topology)
+nsx-export/
+*.csv
+
+# Python
+__pycache__/
+*.pyc
 
 # OS / editor cruft
 .DS_Store
