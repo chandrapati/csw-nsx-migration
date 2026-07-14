@@ -67,6 +67,7 @@ A practitioner's guide for moving **east-west microsegmentation** from **VMware 
 | Path | Description |
 |---|---|
 | [`CSW-NSX-Migration-Guide.md`](CSW-NSX-Migration-Guide.md) | The full guide (14 sections, 3 diagrams) |
+| [`docs/POLICY-MIGRATION-STEPS.md`](docs/POLICY-MIGRATION-STEPS.md) | **Step-by-step policy migration runbook** (export → translate → ADM → analyze → cut over) |
 | [`nsx-vs-csw-architecture.png`](nsx-vs-csw-architecture.png) | Enforcement-model comparison |
 | [`nsx-to-csw-object-mapping.png`](nsx-to-csw-object-mapping.png) | Object mapping + capability gaps |
 | [`nsx-to-csw-migration-phases.png`](nsx-to-csw-migration-phases.png) | Phased timeline + coexistence lanes |
