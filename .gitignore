@@ -1,0 +1,17 @@
+# Generated artifacts
+*.pdf
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+_*_preview.png
+
+# Secrets — never commit credentials or API keys
+*.env
+.env
+secrets.*
+*_credentials.json
+api_credentials.json

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NSX to Cisco Secure Workload — One-Pager</title>
+<style>
+  :root{
+    --navy:#00205b; --blue:#007bc7; --cyan:#00bceb; --grn:#0aa34f;
+    --amber:#b5772c; --red:#c0392b; --vmw:#5a6a72; --ink:#1a1a2e; --grey:#555;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#fff;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif}
+  .page{width:210mm;min-height:296mm;margin:0 auto;padding:12mm 13mm 9mm;position:relative}
+  .topbar{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--navy) 0%,var(--blue) 60%,var(--cyan) 100%);margin-bottom:9px}
+  header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--blue);padding-bottom:8px;margin-bottom:12px}
+  h1{font-size:20px;color:var(--navy);line-height:1.15}
+  h1 small{display:block;font-size:11px;color:var(--grey);font-weight:400;margin-top:4px}
+  .cisco{font-size:10px;color:var(--navy);font-weight:700;letter-spacing:.12em;white-space:nowrap;padding-left:14px}
+  .flow{display:flex;align-items:center;justify-content:center;gap:6px;background:#f5f8fc;border:1px solid #cce4f6;border-radius:6px;padding:9px 10px;margin-bottom:12px;font-size:11px;font-weight:700}
+  .flow .nsx{color:var(--vmw)} .flow .arrow{color:var(--grn);font-size:15px} .flow .csw{color:var(--navy)}
+  .flow .sub{font-weight:400;color:var(--grey);font-size:9.5px;display:block}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  section{margin-bottom:11px}
+  h2{font-size:12px;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #e1ecf6;padding-bottom:3px;margin-bottom:6px}
+  ul{list-style:none}
+  li{font-size:10.5px;line-height:1.5;padding-left:13px;position:relative;margin-bottom:2px}
+  li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+  li.g::before{background:var(--grn)} li.a::before{background:var(--amber)}
+  b{color:var(--navy)}
+  table{width:100%;border-collapse:collapse;font-size:10px;margin-top:2px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:4px 7px;font-weight:600}
+  td{padding:4px 7px;border-bottom:1px solid #e3ebf3;vertical-align:top}
+  tr:nth-child(even) td{background:#f5f8fc}
+  td.nsxc{color:var(--vmw);font-weight:600} td.cswc{color:var(--navy);font-weight:600}
+  .phases{display:flex;gap:5px;margin:2px 0 6px}
+  .ph{flex:1;text-align:center;background:#fff;border:1px solid #cce4f6;border-radius:5px;padding:5px 2px;font-size:8.4px;font-weight:700;color:var(--navy)}
+  .ph span{display:block;font-size:12px;color:var(--blue)}
+  .rule{background:#fff4e6;border-left:4px solid var(--amber);border-radius:0 5px 5px 0;padding:7px 10px;font-size:10.5px;color:#7a4e12;margin-top:4px}
+  .rule b{color:var(--amber)}
+  .outcome{background:#eaf4fb;border:1px solid var(--blue);border-radius:6px;padding:9px 11px;font-size:10.8px;line-height:1.5}
+  footer{position:absolute;left:13mm;right:13mm;bottom:7mm;border-top:1px solid #e1ecf6;padding-top:6px;font-size:8px;color:#8a94a3;text-align:center}
+  @media print{@page{size:A4;margin:0}.page{margin:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar"></div>
+  <header>
+    <h1>Migrate from VMware NSX to Cisco Secure Workload
+      <small>Hypervisor-independent microsegmentation — one policy model for every workload: bare metal, VM, container, and cloud.</small>
+    </h1>
+    <div class="cisco">CISCO<br>Secure&nbsp;Workload</div>
+  </header>
+
+  <div class="flow">
+    <span class="nsx">VMware NSX DFW<span class="sub">enforced in the ESXi kernel · VMware only</span></span>
+    <span class="arrow">&#10142;</span>
+    <span class="csw">Cisco Secure Workload<span class="sub">enforced in the workload OS · any platform</span></span>
+  </div>
+
+  <div class="cols">
+    <div>
+      <section>
+        <h2>Why move now</h2>
+        <ul>
+          <li class="g"><b>Licensing &amp; cost</b> — re-evaluate spend after Broadcom/VMware packaging changes.</li>
+          <li class="g"><b>No platform lock-in</b> — enforcement leaves the hypervisor for the workload OS.</li>
+          <li class="g"><b>Multicloud, one model</b> — on-prem, AWS, Azure, GCP, Kubernetes.</li>
+          <li class="g"><b>Discovery, not guesswork</b> — ADM auto-builds policy from real flow + process data.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>The shift</h2>
+        <ul>
+          <li>A lightweight <b>CSW agent</b> enforces per host (Linux iptables/ipset, Windows WFP).</li>
+          <li>Cloud workloads can be <b>agentless</b> (AWS SG / Azure NSG / GCP FW).</li>
+          <li>Rich <b>flow + process visibility</b> feeds automatic policy discovery.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Plan for these deltas</h2>
+        <ul>
+          <li class="a"><b>L7 App-ID (DPI)</b> → process + FQDN policy; true L7 via Secure Firewall / Hypershield.</li>
+          <li class="a"><b>Distributed IDS/IPS</b> → Cisco Secure Firewall (CSW adds forensics &amp; vuln context).</li>
+          <li class="a"><b>Identity Firewall (AD user)</b> → Cisco ISE user/device context.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div>
+      <section>
+        <h2>What maps cleanly</h2>
+        <table>
+          <tr><th>VMware NSX</th><th>Cisco Secure Workload</th></tr>
+          <tr><td class="nsxc">Tags / VM attributes</td><td class="cswc">Labels (vCenter, CMDB, ServiceNow)</td></tr>
+          <tr><td class="nsxc">Groups (dynamic/static)</td><td class="cswc">Inventory filters + Scopes</td></tr>
+          <tr><td class="nsxc">Security Policy / Category</td><td class="cswc">Workspace + policy priority</td></tr>
+          <tr><td class="nsxc">DFW rule (src/dst/svc)</td><td class="cswc">Policy (consumer→provider)</td></tr>
+          <tr><td class="nsxc">Services (ports/proto)</td><td class="cswc">Protocols &amp; ports</td></tr>
+          <tr><td class="nsxc">Applied To</td><td class="cswc">Scope assignment</td></tr>
+        </table>
+      </section>
+      <section>
+        <h2>How we de-risk it — 7 phases</h2>
+        <div class="phases">
+          <div class="ph"><span>1</span>Discover</div>
+          <div class="ph"><span>2</span>Model</div>
+          <div class="ph"><span>3</span>Translate</div>
+          <div class="ph"><span>4</span>Analyze</div>
+          <div class="ph"><span>5</span>Parallel</div>
+          <div class="ph"><span>6</span>Cutover</div>
+          <div class="ph"><span>7</span>Retire</div>
+        </div>
+        <ul>
+          <li>NSX keeps enforcing until each app's CSW policy is <b>proven in live analysis</b>.</li>
+          <li>Cut over <b>one application at a time</b>, then retire the matching NSX rules.</li>
+          <li>Rollback is always "disable CSW enforcement on that scope."</li>
+        </ul>
+        <div class="rule"><b>Golden rule:</b> never enforce the same application on NSX and CSW at the same time.</div>
+      </section>
+    </div>
+  </div>
+
+  <section>
+    <h2>Outcome</h2>
+    <div class="outcome">
+      Portable, <b>zero-trust microsegmentation</b> across your entire estate — with lower platform dependency and
+      richer visibility — delivered through a <b>controlled, reversible, per-application cutover</b>. No automated
+      rule import is required: CSW's ADM proposes policy from your real traffic, so you validate intent instead of
+      hand-copying thousands of rules.
+    </div>
+  </section>
+
+  <footer>
+    Cisco Solutions Engineering · Summarized from public Cisco &amp; VMware documentation · Not an official product document · Trademarks belong to their respective owners.
+  </footer>
+</div>
+</body>
+</html>
